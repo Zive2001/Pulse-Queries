@@ -18,3 +18,15 @@ CREATE TABLE Subcategories (
 );
 
 select * from Subcategories
+
+
+-- Create Support Persons table
+CREATE TABLE SupportPersons (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(100) NOT NULL,
+    email NVARCHAR(255) NOT NULL,
+    category_id INT NOT NULL,
+    is_active BIT DEFAULT 1,
+    created_at DATETIME2 DEFAULT GETDATE(),
+    FOREIGN KEY (category_id) REFERENCES Categories(id)
+);
