@@ -76,3 +76,14 @@ CREATE TABLE TicketHistory (
     FOREIGN KEY (ticket_id) REFERENCES Tickets(id),
     FOREIGN KEY (changed_by) REFERENCES Users(id)
 );
+
+-- Insert initial data
+INSERT INTO Categories (name) VALUES 
+('Data Analytics'),
+('Software Systems');
+
+INSERT INTO Subcategories (category_id, name, requires_text_input) VALUES 
+(1, 'Power BI', 0),
+(1, 'Excel', 0),
+(1, 'Other', 1),
+(2, 'System Issue', 0);
