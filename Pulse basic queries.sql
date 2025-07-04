@@ -103,3 +103,25 @@ CREATE INDEX IX_Tickets_AssignedTo ON Tickets(assigned_to);
 CREATE INDEX IX_Tickets_Status ON Tickets(status);
 CREATE INDEX IX_Tickets_Category ON Tickets(category_id);
 CREATE INDEX IX_Tickets_CreatedAt ON Tickets(created_at);
+
+
+-- Create trigger to update updated_at timestamp
+CREATE TRIGGER TR_Tickets_UpdatedAt 
+ON Tickets 
+AFTER UPDATE 
+AS 
+BEGIN 
+    UPDATE Tickets 
+    SET updated_at = GETDATE() 
+    WHERE id IN (SELECT id FROM inserted);
+END;
+
+CREATE TRIGGER TR_Users_UpdatedAt 
+ON Users 
+AFTER UPDATE 
+AS 
+BEGIN 
+    UPDATE Users 
+    SET updated_at = GETDATE() 
+    WHERE id IN (SELECT id FROM inserted);
+END;
