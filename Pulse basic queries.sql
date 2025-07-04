@@ -87,3 +87,19 @@ INSERT INTO Subcategories (category_id, name, requires_text_input) VALUES
 (1, 'Excel', 0),
 (1, 'Other', 1),
 (2, 'System Issue', 0);
+
+
+INSERT INTO SupportPersons (name, email, category_id) VALUES 
+('Gayan', 'gayankar@masholdings.com', 1),
+('Nadeesha', 'nadeeshasa@masholdings.com', 1),
+('Ashen', 'ashenku@masholdings.com', 1),
+('Gayan', 'gayankar@masholdings.com', 2),
+('Supun', 'supunse@masholdings.com', 2),
+('Nilaksha', 'NilakshaS@masholdings.com', 2);
+
+-- Create indexes for better performance
+CREATE INDEX IX_Tickets_CreatedBy ON Tickets(created_by);
+CREATE INDEX IX_Tickets_AssignedTo ON Tickets(assigned_to);
+CREATE INDEX IX_Tickets_Status ON Tickets(status);
+CREATE INDEX IX_Tickets_Category ON Tickets(category_id);
+CREATE INDEX IX_Tickets_CreatedAt ON Tickets(created_at);
