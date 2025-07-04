@@ -61,3 +61,18 @@ CREATE TABLE Tickets (
     FOREIGN KEY (mentioned_support_person) REFERENCES SupportPersons(id),
     FOREIGN KEY (approved_by) REFERENCES Users(id)
 );
+
+
+-- Create Ticket History table for tracking changes
+CREATE TABLE TicketHistory (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    ticket_id INT NOT NULL,
+    changed_by INT NOT NULL,
+    field_name NVARCHAR(100) NOT NULL,
+    old_value NVARCHAR(MAX),
+    new_value NVARCHAR(MAX),
+    change_reason NVARCHAR(255),
+    created_at DATETIME2 DEFAULT GETDATE(),
+    FOREIGN KEY (ticket_id) REFERENCES Tickets(id),
+    FOREIGN KEY (changed_by) REFERENCES Users(id)
+);
