@@ -125,3 +125,8 @@ BEGIN
     SET updated_at = GETDATE() 
     WHERE id IN (SELECT id FROM inserted);
 END;
+
+
+Select*from TicketHistory
+
+Select*from Tickets
