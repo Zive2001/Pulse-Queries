@@ -177,3 +177,11 @@ CREATE TABLE AdminActions (
     created_at DATETIME2 DEFAULT GETDATE(),
     FOREIGN KEY (admin_user_id) REFERENCES Users(id)
 );
+
+
+
+
+-- 4. Create index for performance on admin actions
+CREATE INDEX IX_AdminActions_AdminUser ON AdminActions(admin_user_id);
+CREATE INDEX IX_AdminActions_ActionType ON AdminActions(action_type);
+CREATE INDEX IX_AdminActions_CreatedAt ON AdminActions(created_at);
