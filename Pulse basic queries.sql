@@ -130,3 +130,36 @@ END;
 Select*from TicketHistory
 
 Select*from Tickets
+
+select*from Users
+
+
+
+ALTER TABLE Users 
+ADD is_admin BIT DEFAULT 0,
+    permissions NVARCHAR(500) DEFAULT NULL;
+-- Ensure the target email exists in the Users table
+-- If it does, update is_admin and permissions
+-- If not, insert a new row
+
+MERGE INTO Users AS target
+USING (SELECT 'supunse@masholdings.com' AS email) AS source
+ON target.email = source.email
+WHEN MATCHED THEN
+    UPDATE SET 
+        target.is_admin = 1,
+        target.permissions = 'delete_tickets,manage_support_persons,manage_managers,manage_categories,view_all_tickets,approve_tickets'
+WHEN NOT MATCHED THEN
+    INSERT (email, name, role, is_admin, permissions)
+    VALUES (
+        'supunse@masholdings.com',
+        'Supun',
+        'admin',
+        1,
+        'delete_tickets,manage_support_persons,manage_managers,manage_categories,view_all_tickets,approve_tickets'
+    );
+
+
+    UPDATE Users
+SET role = 'admin'
+WHERE email = 'supunse@masholdings.com';
