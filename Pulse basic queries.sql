@@ -163,3 +163,17 @@ WHEN NOT MATCHED THEN
     UPDATE Users
 SET role = 'admin'
 WHERE email = 'supunse@masholdings.com';
+
+
+
+CREATE TABLE AdminActions (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    admin_user_id INT NOT NULL,
+    action_type NVARCHAR(100) NOT NULL, -- 'delete_ticket', 'add_support_person', 'add_manager', 'update_category', etc.
+    target_type NVARCHAR(50) NOT NULL,  -- 'ticket', 'user', 'category', 'support_person'
+    target_id INT NOT NULL,
+    target_details NVARCHAR(MAX),
+    action_description NVARCHAR(500),
+    created_at DATETIME2 DEFAULT GETDATE(),
+    FOREIGN KEY (admin_user_id) REFERENCES Users(id)
+);
